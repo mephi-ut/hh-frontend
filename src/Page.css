@@ -56,3 +56,10 @@
 		z-index: -32;
 	}
 }
+
+.authed .requireNotAuthed {
+	display: none;
+}
+.notAuthed .requireAuthed {
+	display: none;
+}

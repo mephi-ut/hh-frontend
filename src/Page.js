@@ -18,7 +18,8 @@ import Popup from "./views/Popup";
 
 
 const VacanciesLink = () => (<NavLink exact to="/">Vacancies</NavLink>)
-const LoginLink = userIsNotAuthenticated(() => <NavLink exact to="/login">Login</NavLink>)
+const LoginLink = () => <NavLink exact to="/login" className='requireNotAuthed'>Login</NavLink>
+const LogoutLink = () => <NavLink exact to="/logout" className='requireAuthed'>Logout</NavLink>
 
 class Page extends BaseComponent {
 	constructor(props) {
@@ -49,15 +50,17 @@ class Page extends BaseComponent {
 	}
 
 	render() {
+		console.log('Page props', this.props);
 		return (
 			<Router history={this.state.history}>
-				<div className="Page">
+				<div className={"Page"+(this.props.user.data==null?' notAuthed':' authed')}>
 					<Navbar fluid collapseOnSelect>
 						<Navbar.Header>
 							<Navbar.Collapse>
 								<Navbar.Brand>
 									<VacanciesLink />
 									<LoginLink />
+									<LogoutLink />
 								</Navbar.Brand>
 							</Navbar.Collapse>
 							<Navbar.Toggle />

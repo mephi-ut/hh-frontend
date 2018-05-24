@@ -55,7 +55,6 @@ export class SignUpView extends Component {
 				<Button
 					block
 					bsSize="large"
-					type="primary"
 					onClick={this.gotoLogin}
 				>
 					Back to the Login form

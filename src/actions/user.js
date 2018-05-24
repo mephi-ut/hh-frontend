@@ -102,6 +102,10 @@ export function loginUser(login, password, redirect="/") {
 	}
 }
 
+export function logoutUser(redirect="/") {
+	return logout()
+}
+
 export function signUpUser(login, password, email, redirect="/") {
 	return function(dispatch) {
 		dispatch(loginUserRequest());
