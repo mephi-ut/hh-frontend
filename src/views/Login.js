@@ -15,6 +15,13 @@ export class LoginView extends Component {
 		};
 	}
 
+	componentDidMount() {
+		if (window.location.search.indexOf('redirect=%2Flogout') == 1) {
+			this.props.history.push('/login');
+		}
+		console.log(this.props, window.location, window.location.search.indexOf('redirect=%2Flogout'));
+	}
+
 	validateForm() {
 		return this.state.login.length > 0 && this.state.password.length > 0;
 	}
