@@ -63,3 +63,17 @@
 .notAuthed .requireAuthed {
 	display: none;
 }
+div.Page nav.navbar .container-fluid {
+	background-color: #dce1ff;
+}
+.navbar-header .navbar-collapse {
+	background-color: #fff;
+}
+@media all and (min-width: 768px) {
+	html .navbar-header .navbar-collapse {
+		background-color: inherit;
+	}
+	html div.Page nav.navbar .container-fluid {
+		background-color: #eef;
+	}
+}

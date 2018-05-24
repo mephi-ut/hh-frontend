@@ -20,6 +20,7 @@ import Popup from "./views/Popup";
 const VacanciesLink = () => (<NavLink exact to="/">Vacancies</NavLink>)
 const LoginLink = () => <NavLink exact to="/login" className='requireNotAuthed'>Login</NavLink>
 const LogoutLink = () => <NavLink exact to="/logout" className='requireAuthed'>Logout</NavLink>
+const ProfileLink = () => <NavLink exact to="/profile" className='requireAuthed'>Profile</NavLink>
 
 class Page extends BaseComponent {
 	constructor(props) {
@@ -61,6 +62,7 @@ class Page extends BaseComponent {
 									<VacanciesLink />
 									<LoginLink />
 									<LogoutLink />
+									<ProfileLink />
 								</Navbar.Brand>
 							</Navbar.Collapse>
 							<Navbar.Toggle />
