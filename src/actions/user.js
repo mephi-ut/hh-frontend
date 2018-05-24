@@ -6,7 +6,7 @@ import { api } from './api.js';
 
 export function tryToken(token, initiator) {
 	console.log("tryToken");
-	api('whoami', {}, {}, token)
+	api('profile', {}, {}, token)
 		.then(function(data){
 			if (data.UserId == null) {
 				console.log("tryToken: failed");
@@ -104,10 +104,6 @@ export function loginUser(login, password, redirect="/") {
 
 export function logoutUser(redirect="/") {
 	return logout();
-}
-
-export function updateProfile() {
-	alert('Not implemented, yet');
 }
 
 export function signUpUser(login, password, email, redirect="/") {

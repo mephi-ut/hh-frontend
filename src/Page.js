@@ -29,7 +29,7 @@ class Page extends BaseComponent {
 			history: createHistory(),
 			user: {
 			},
-			whoami: {
+			profile: {
 			},
 		};
 		this.tryToken();
@@ -46,19 +46,19 @@ class Page extends BaseComponent {
 		//this.state.history.push("/");
 		//console.log(this.state, this.props);
 		this.props.loginUserSuccess(token);
-		this.api('whoami').then(data => this.setWhoami(data));
+		this.api('profile').then(data => this.setProfile(data));
 	}
 
 	onAuthFailed(error) {
 		this.props.loginUserFailure(error)
 	}
 
-	setWhoami(whoami) {
-		console.log('whoami', whoami);
+	setProfile(profile) {
+		console.log('profile', profile);
 		this.setState({
 			history: this.state.history,
 			user: this.state.user,
-			whoami: whoami,
+			profile: profile,
 		});
 	}
 
@@ -84,7 +84,7 @@ class Page extends BaseComponent {
 						</Navbar.Header>
 					</Navbar>
 					<Popup message={this.props.user.message}/>
-					<Routes user={this.props.user} whoami={this.state.whoami} />
+					<Routes user={this.props.user} profile={this.state.profile} />
 					<ButtonToolbar>
 					</ButtonToolbar>
 					<img src={logo} className="Page-logo" alt="logo" />

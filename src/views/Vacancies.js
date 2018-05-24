@@ -8,7 +8,7 @@ class VacanciesView extends BaseComponent {
 		super(props);
 
 		this.state = {
-			whoami: null,
+			profile: null,
 		}
 	}
 

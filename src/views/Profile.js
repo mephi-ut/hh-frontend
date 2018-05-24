@@ -3,18 +3,17 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Profile.css";
 import "./Form.css";
 import { connect } from 'react-redux'
-import { updateProfile } from '../actions/user'
 import { BaseComponent } from "../components/BaseComponent";
 
-export class ProfileView extends Component {
+export class ProfileView extends BaseComponent {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			login: this.props.whoami.Nickname,
+			login: this.props.profile.Nickname,
 			password: "",
 			password_confirm: "",
-			email: this.props.whoami.Email,
+			email: this.props.profile.Email,
 		};
 	}
 
@@ -22,7 +21,7 @@ export class ProfileView extends Component {
 	}
 
 	validateForm() {
-		return true;
+		return this.state.login.length > 0 && this.state.password_confirm === this.state.password;
 	}
 
 	handleChange = event => {
@@ -37,7 +36,10 @@ export class ProfileView extends Component {
 	}
 
 	updateProfile() {
-		this.props.updateProfile();
+		this.api('profile', {method: 'PUT'}, {username: this.state.login, password: this.state.password, email: this.state.email})
+			.then(function(){
+				console.log('success');
+			});
 	}
 
 	isDisabled() {
@@ -45,6 +47,9 @@ export class ProfileView extends Component {
 	}
 
 	render() {
+		if (this.props.profile.Nickname === undefined) {
+			return "";
+		}
 		return (
 			<div className="Profile Form">
 				<form onSubmit={this.handleSubmit}>
@@ -97,4 +102,4 @@ export class ProfileView extends Component {
 	}
 }
 
-export default connect(null, { updateProfile })(ProfileView)
+export default connect(null, null)(ProfileView)
