@@ -12,19 +12,6 @@ class VacanciesView extends BaseComponent {
 		}
 	}
 
-	setWhoami(whoami) {
-		this.setState({
-			whoami: whoami
-		});
-	}
-
-	componentDidMount() {
-		if (this.props.user.data == null) {
-			return;
-		}
-		this.api('whoami').then(data => this.setWhoami(data));
-	}
-
 	render() {
 		return "";
 		console.log('status props', this.props, this.state);

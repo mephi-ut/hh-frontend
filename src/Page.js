@@ -29,6 +29,8 @@ class Page extends BaseComponent {
 			history: createHistory(),
 			user: {
 			},
+			whoami: {
+			},
 		};
 		this.tryToken();
 	}
@@ -44,16 +46,29 @@ class Page extends BaseComponent {
 		//this.state.history.push("/");
 		//console.log(this.state, this.props);
 		this.props.loginUserSuccess(token);
+		this.api('whoami').then(data => this.setWhoami(data));
 	}
 
 	onAuthFailed(error) {
 		this.props.loginUserFailure(error)
 	}
 
+	setWhoami(whoami) {
+		console.log('whoami', whoami);
+		this.setState({
+			history: this.state.history,
+			user: this.state.user,
+			whoami: whoami,
+		});
+	}
+
+	componentDidMount() {
+	}
+
 	render() {
 		console.log('Page props', this.props);
 		return (
-			<Router history={this.state.history}>
+			<Router history={this.state.history} user={this.props.user}>
 				<div className={"Page"+(this.props.user.data==null?' notAuthed':' authed')}>
 					<Navbar fluid collapseOnSelect>
 						<Navbar.Header>
@@ -69,7 +84,7 @@ class Page extends BaseComponent {
 						</Navbar.Header>
 					</Navbar>
 					<Popup message={this.props.user.message}/>
-					<Routes />
+					<Routes user={this.props.user} whoami={this.state.whoami} />
 					<ButtonToolbar>
 					</ButtonToolbar>
 					<img src={logo} className="Page-logo" alt="logo" />

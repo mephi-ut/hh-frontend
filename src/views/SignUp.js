@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./SignUp.css";
+import "./Form.css";
 import { connect } from 'react-redux'
 import { signUpUser } from '../actions/user'
 import Popup from "./Popup";
@@ -51,7 +52,7 @@ export class SignUpView extends Component {
 			message = "passwords doesn't match";
 		}
 		return (
-			<div className="SignUp">
+			<div className="SignUp Form">
 				<Button
 					block
 					bsSize="large"

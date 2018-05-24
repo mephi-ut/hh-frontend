@@ -1,12 +1,21 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Profile.css";
+import "./Form.css";
 import { connect } from 'react-redux'
-import { loginUser } from '../actions/user'
+import { updateProfile } from '../actions/user'
+import { BaseComponent } from "../components/BaseComponent";
 
-export class LoginView extends Component {
+export class ProfileView extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			login: this.props.whoami.Nickname,
+			password: "",
+			password_confirm: "",
+			email: this.props.whoami.Email,
+		};
 	}
 
 	componentDidMount() {
@@ -18,7 +27,7 @@ export class LoginView extends Component {
 
 	handleChange = event => {
 		this.setState({
-			[event.target.name]: event.target.value
+			[event.target.id]: event.target.value
 		});
 	}
 
@@ -28,7 +37,7 @@ export class LoginView extends Component {
 	}
 
 	updateProfile() {
-		alert('Not implemented, yet')
+		this.props.updateProfile();
 	}
 
 	isDisabled() {
@@ -37,9 +46,8 @@ export class LoginView extends Component {
 
 	render() {
 		return (
-			<div className="Profile">
+			<div className="Profile Form">
 				<form onSubmit={this.handleSubmit}>
-					<input type='hidden' name='userId' value={this.props.user.data.UserId} />
 					<FormGroup controlId="login" bsSize="large">
 						<ControlLabel>Login</ControlLabel>
 						<FormControl
@@ -56,7 +64,6 @@ export class LoginView extends Component {
 							value={this.state.password}
 							onChange={this.handleChange}
 							type="password"
-							required="true"
 						/>
 					</FormGroup>
 					<FormGroup controlId="password_confirm" bsSize="large">
@@ -65,7 +72,6 @@ export class LoginView extends Component {
 							value={this.state.password_confirm}
 							onChange={this.handleChange}
 							type="password"
-							required="true"
 						/>
 					</FormGroup>
 					<FormGroup controlId="email" bsSize="large">
@@ -83,22 +89,12 @@ export class LoginView extends Component {
 						onClick={this.handleSubmit}
 						type="submit"
 					>
-						Login
+						Update
 					</Button>
 				</form>
-				<br/>
-				<br/>
-				<Button
-					block
-					bsSize="large"
-					type="button"
-					onClick={this.gotoSignUp}
-				>
-					Sign up
-				</Button>
 			</div>
 		);
 	}
 }
 
-export default connect(null, { loginUser })(LoginView)
+export default connect(null, { updateProfile })(ProfileView)

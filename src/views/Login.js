@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
+import "./Form.css";
 import { connect } from 'react-redux'
 import { loginUser } from '../actions/user'
 
@@ -50,7 +51,7 @@ export class LoginView extends Component {
 	}
 	render() {
 		return (
-			<div className="Login">
+			<div className="Login Form">
 				<form onSubmit={this.handleSubmit}>
 					<FormGroup controlId="login" bsSize="large">
 						<ControlLabel>Login</ControlLabel>

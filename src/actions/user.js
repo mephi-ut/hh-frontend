@@ -103,7 +103,11 @@ export function loginUser(login, password, redirect="/") {
 }
 
 export function logoutUser(redirect="/") {
-	return logout()
+	return logout();
+}
+
+export function updateProfile() {
+	alert('Not implemented, yet');
 }
 
 export function signUpUser(login, password, email, redirect="/") {
