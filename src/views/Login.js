@@ -54,7 +54,7 @@ export class LoginView extends Component {
 			<div className="Login Form">
 				<form onSubmit={this.handleSubmit}>
 					<FormGroup controlId="login" bsSize="large">
-						<ControlLabel>Login</ControlLabel>
+						<ControlLabel>Имя пользователя</ControlLabel>
 						<FormControl
 							autoFocus
 							type="login"
@@ -64,7 +64,7 @@ export class LoginView extends Component {
 						/>
 					</FormGroup>
 					<FormGroup controlId="password" bsSize="large">
-						<ControlLabel>Password</ControlLabel>
+						<ControlLabel>Пароль</ControlLabel>
 						<FormControl
 							value={this.state.password}
 							onChange={this.handleChange}
@@ -79,9 +79,11 @@ export class LoginView extends Component {
 						onClick={this.handleSubmit}
 						type="submit"
 					>
-						Login
+						Войти
 					</Button>
 				</form>
+				<br/>
+				<br/>
 				<br/>
 				<br/>
 				<Button
@@ -90,7 +92,7 @@ export class LoginView extends Component {
 					type="button"
 					onClick={this.gotoSignUp}
 				>
-					Sign up
+					Зарегистрироваться
 				</Button>
 			</div>
 		);

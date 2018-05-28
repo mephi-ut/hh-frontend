@@ -1,0 +1,11 @@
+.vacancy, .test {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+button, input, .test .checkbox input[type="checkbox"] {
+	margin: 0;
+	left: 0;
+}
+textarea {
+	width: 100%;
+}

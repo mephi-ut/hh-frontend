@@ -58,13 +58,15 @@ export class SignUpView extends Component {
 					bsSize="large"
 					onClick={this.gotoLogin}
 				>
-					Back to the Login form
+					Обратно к форме авторизации
 				</Button>
+				<br/>
+				<br/>
 				<br/>
 				<br/>
 				<form onSubmit={this.handleSubmit}>
 					<FormGroup controlId="login" bsSize="large">
-						<ControlLabel>Login</ControlLabel>
+						<ControlLabel>Имя пользователя</ControlLabel>
 						<FormControl
 							autoFocus
 							type="login"
@@ -74,7 +76,7 @@ export class SignUpView extends Component {
 						/>
 					</FormGroup>
 					<FormGroup controlId="password" bsSize="large">
-						<ControlLabel>Password</ControlLabel>
+						<ControlLabel>Пароль</ControlLabel>
 						<FormControl
 							value={this.state.password}
 							onChange={this.handleChange}
@@ -83,7 +85,7 @@ export class SignUpView extends Component {
 						/>
 					</FormGroup>
 					<FormGroup controlId="password_confirm" bsSize="large">
-						<ControlLabel>Password (confirm)</ControlLabel>
+						<ControlLabel>Пароль (подтверждение)</ControlLabel>
 						<FormControl
 							value={this.state.password_confirm}
 							onChange={this.handleChange}
