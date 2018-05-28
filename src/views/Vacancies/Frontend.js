@@ -35,7 +35,7 @@ class VacancyFrontendView extends BaseComponent {
 				<h3>Требования</h3>
 				<ul className='requirements'>
 					<li>Гражданство РФ.</li>
-					<li>Опыт работы с ReactJS не менее 1 года.</li>
+					<li>Опыт работы с ReactJS не менее 2 лет.</li>
 					<li>Опыт работы с ОС GNU/Linux не менее 1 года.</li>
 				</ul>
 				<h3>Плюсом будет</h3>
