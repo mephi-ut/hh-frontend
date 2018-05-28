@@ -44,7 +44,7 @@ class VacancyFrontendTestView extends BaseComponent {
 					<FormGroup controlId="question2" bsSize="large">
 						<ControlLabel>№2. Каким из нижеуказанных способов оптимизируется изменение/обновление большого количества узлов?</ControlLabel><br/>
 						<ul>
-							<li><Radio name='question2'>Группировка изменения/обновления</Radio></li>
+							<li><Radio name='question2'>Группировка изменений/обновлений</Radio></li>
 							<li><Radio name='question2'>Обнаружение изменений</Radio></li>
 							<li><Radio name='question2'>Оба ответа верны</Radio></li>
 						</ul>
