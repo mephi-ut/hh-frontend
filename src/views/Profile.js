@@ -1,19 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Profile.css";
 import "./Form.css";
 import { connect } from 'react-redux'
 import { BaseComponent } from "../components/BaseComponent";
+import ReactTelInput from 'react-telephone-input';
 
 export class ProfileView extends BaseComponent {
 	constructor(props) {
 		super(props);
 
+		var email = this.props.profile.Email;
+		var phone = this.props.profile.Phone;
+		if (email == null) {
+			email = '';
+		}
+		if (phone == null) {
+			phone = ''
+		}
+
 		this.state = {
 			login: this.props.profile.Nickname,
 			password: "",
 			password_confirm: "",
-			email: this.props.profile.Email,
+			email: email,
+			phone: phone,
 		};
 	}
 
@@ -30,15 +41,28 @@ export class ProfileView extends BaseComponent {
 		});
 	}
 
+	onPhoneChange(telNumber, selectedCountry) {
+		this.setState({phone: telNumber});
+	}
+
 	handleSubmit = event => {
 		event.preventDefault();
 		this.updateProfile();
 	}
 
 	updateProfile() {
-		this.api('profile', {method: 'PUT'}, {username: this.state.login, password: this.state.password, email: this.state.email})
-			.then(function(){
-				console.log('success');
+		this.api('profile', {method: 'PUT'}, {username: this.state.login, password: this.state.password, email: this.state.email, phone: this.state.phone})
+			.then(response => function() {
+					console.log('response', response);
+					if (response.status === "OK") {
+						alert('Сохранено');
+					} else {
+						alert('Не удалось сохранить. '+response.error);
+					}
+				}
+			)
+			.catch((error) => {
+				alert('Не удалось сохранить. '+error);
 			});
 	}
 
@@ -48,7 +72,11 @@ export class ProfileView extends BaseComponent {
 
 	render() {
 		if (this.props.profile.Nickname === undefined) {
-			return "";
+			return (
+				<div className="Profile">
+					Вы не авторизованы
+				</div>
+			);
 		}
 		return (
 			<div className="Profile Form">
@@ -85,6 +113,16 @@ export class ProfileView extends BaseComponent {
 							value={this.state.email}
 							onChange={this.handleChange}
 							type="email"
+						/>
+					</FormGroup>
+					<FormGroup controlId="phone" bsSize="large">
+						<ControlLabel>Phone number</ControlLabel>
+						<ReactTelInput
+							name="phone"
+							defaultCountry='ru'
+							onChange={this.onPhoneChange.bind(this)}
+							flagsImagePath='/images/flags.png'
+							value={this.state.phone}
 						/>
 					</FormGroup>
 					<Button

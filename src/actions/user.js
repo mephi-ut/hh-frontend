@@ -5,15 +5,15 @@ import jwtDecode from 'jwt-decode';
 import { api } from './api.js';
 
 export function tryToken(token, initiator) {
-	console.log("tryToken");
+	//console.log("tryToken");
 	api('profile', {}, {}, token)
 		.then(function(data){
 			if (data.UserId == null) {
-				console.log("tryToken: failed");
+				//console.log("tryToken: failed");
 				initiator.onAuthFailed();
 				return
 			}
-			console.log("tryToken: success");
+			//console.log("tryToken: success");
 			initiator.onAuthed(token);
 		});
 	return {
@@ -34,8 +34,8 @@ export function loginUserSuccess(token) {
 	}
 }
 
-export function loginUserFailure(error) {
-	console.log("loginUserFailure", error);
+export function loginUserFailure(error, redirectTo) {
+	//console.log("loginUserFailure", error);
 	localStorage.removeItem('token');
 	if (error == null) {
 		error = {};
@@ -48,20 +48,21 @@ export function loginUserFailure(error) {
 		payload: {
 			status:	 error.response.status,
 			statusText: error.response.statusText,
-			message:	error.response.message
+			message:	error.response.message,
+			redirectTo: redirectTo,
 		}
 	}
 }
 
 export function loginUserRequest() {
-	console.log("loginUserRequest");
+	//console.log("loginUserRequest");
 	return {
 		type: constants.LOGIN_USER_REQUEST
 	}
 }
 
 export function logout() {
-	console.log("logout");
+	//console.log("logout");
 	localStorage.removeItem('token');
 	return {
 		type: constants.LOGOUT_USER
@@ -69,35 +70,35 @@ export function logout() {
 }
 
 export function logoutAndRedirect() {
-	console.log("logoutAndRedirect");
+	//console.log("logoutAndRedirect");
 	return (dispatch, state) => {
 		dispatch(logout());
 		//dispatch(pushState(null, '/login'));
 	}
 }
 
-export function loginUser(login, password, redirect="/") {
+export function loginUser(login, password, redirect="/", redirectOnFailure="/") {
 	return function(dispatch) {
 		dispatch(loginUserRequest());
 		return api('auth', {method: 'post'}, {username: login, password: password})
 			.then(checkHttpStatus)
 			.then(response => {
 				try {
-					console.log("loginUser: success");
+					//console.log("loginUser: success");
 					dispatch(loginUserSuccess(response.token));
 				} catch (e) {
-					console.log("loginUser: got an exception:", e);
+					//console.log("loginUser: got an exception:", e);
 					dispatch(loginUserFailure({
 						response: {
 							status: 403,
 							statusText: 'Invalid token'
 						}
-					}));
+					}, redirectOnFailure));
 				}
 			})
 			.catch(error => {
-				console.log("loginUser: got an exception (case 2):", error);
-				dispatch(loginUserFailure(error));
+				//console.log("loginUser: got an exception (case 2):", error);
+				dispatch(loginUserFailure(error, redirectOnFailure));
 			})
 	}
 }
@@ -106,28 +107,28 @@ export function logoutUser(redirect="/") {
 	return logout();
 }
 
-export function signUpUser(login, password, email, redirect="/") {
+export function signUpUser(login, password, email, redirect="/", redirectOnFailure='/') {
 	return function(dispatch) {
 		dispatch(loginUserRequest());
 		return api('sign_up', {method: 'post'}, {username: login, password: password, email: email})
 			.then(checkHttpStatus)
 			.then(response => {
 				try {
-					console.log("signUpUser: success");
+					//console.log("signUpUser: success");
 					dispatch(loginUserSuccess(response.token));
 				} catch (e) {
-					console.log("signUpUser: got an exception:", e);
+					//console.log("signUpUser: got an exception:", e);
 					dispatch(loginUserFailure({
 						response: {
 							status: 403,
 							statusText: 'Invalid token'
 						}
-					}));
+					}, redirectOnFailure));
 				}
 			})
 			.catch(error => {
-				console.log("signUpUser: got an exception (case 2):", error);
-				dispatch(loginUserFailure(error));
+				//console.log("signUpUser: got an exception (case 2):", error);
+				dispatch(loginUserFailure(error), redirectOnFailure);
 			})
 	}
 }

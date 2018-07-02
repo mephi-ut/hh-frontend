@@ -3,7 +3,7 @@ export function checkHttpStatus(response) {
 	if (response.code >= 200 && response.code < 300) {
 		return response
 	} else {
-		console.log(response);
+		//console.log(response);
 		var error = new Error(response.statusText)
 		error.response = response
 		throw error
@@ -42,7 +42,7 @@ export function ipportsFormat(ipports) {
 	}
 	var ipportsStr = [];
 	for (var i=0; i<ipports.length; i++) {
-		console.log(this);
+		//console.log(this);
 		ipportsStr.push(ipportFormat(ipports[i]));
 	};
 	return ipportsStr.join(", ");

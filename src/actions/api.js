@@ -31,6 +31,6 @@ export function api(resource, options, parameters, token) {
 	} else {
 		options.body = JSON.stringify(parameters);
 	}
-	return fetch('/'+resource+'.json?'+queryString, options)
+	return fetch('https://hh.it.mephi.ru/'+resource+'.json?'+queryString, options)
 		.then(response => response.json());
 }

@@ -62,8 +62,6 @@ export class SignUpView extends Component {
 				</Button>
 				<br/>
 				<br/>
-				<br/>
-				<br/>
 				<form onSubmit={this.handleSubmit}>
 					<FormGroup controlId="login" bsSize="large">
 						<ControlLabel>Имя пользователя</ControlLabel>
@@ -103,6 +101,7 @@ export class SignUpView extends Component {
 					</FormGroup>
 					<Button
 						block
+						bsStyle="primary"
 						bsSize="large"
 						disabled={this.isDisabled()}
 						onClick={this.handleSubmit}

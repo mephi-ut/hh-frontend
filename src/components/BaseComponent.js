@@ -4,7 +4,11 @@ import { api } from "../actions/api.js";
 
 export class BaseComponent extends Component {
 	api(resource, options, parameters) {
-		return api(resource, options, parameters, this.props.user.data.token)
+		var token = '';
+		if (this.props.user.data != null) {
+			token = this.props.user.data.token
+		}
+		return api(resource, options, parameters, token);
 	}
 }
 

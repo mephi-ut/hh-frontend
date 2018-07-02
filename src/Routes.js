@@ -22,13 +22,13 @@ const addPropsToRoute = (WrappedComponent, passedProps)=>{
 }
 
 export default (props) =>
-	<Switch>{console.log('Switch', props)}
+	<Switch>{/*console.log('Switch', props)*/}
 		<Route path="/" exact component={Vacancies} />
 		<Route path="/login" exact component={userIsNotAuthenticatedRedir(Login)} />
 		<Route path="/logout" exact component={userIsAuthenticatedRedir(Logout)} />
 		<Route path="/signup" exact component={userIsNotAuthenticatedRedir(SignUp)} />
 		<Route path="/profile" exact component={userIsAuthenticatedRedir(addPropsToRoute(Profile, props))} />
 		<Route path="/vacancies/frontend" exact component={VacancyFrontend} />
-		<Route path="/vacancies/frontend/test" exact component={VacancyFrontendTest} />
+		<Route path="/vacancies/frontend/test" exact component={addPropsToRoute(VacancyFrontendTest, props)} />
 		<Route component={NotFound} status={404} />
 	</Switch>;

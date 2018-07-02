@@ -17,10 +17,10 @@ export class LoginView extends Component {
 	}
 
 	componentDidMount() {
-		if (window.location.search.indexOf('redirect=%2Flogout') == 1) {
+		if (window.location.search.indexOf('redirect=%2Flogout') === 1) {
 			this.props.history.push('/login');
 		}
-		console.log(this.props, window.location, window.location.search.indexOf('redirect=%2Flogout'));
+		//console.log(this.props, window.location, window.location.search.indexOf('redirect=%2Flogout'));
 	}
 
 	validateForm() {
@@ -39,7 +39,7 @@ export class LoginView extends Component {
 	}
 
 	login() {
-		this.props.loginUser(this.state.login, this.state.password, this.state.redirectTo);
+		this.props.loginUser(this.state.login, this.state.password, this.state.redirectTo, '/login');
 	}
 
 	isDisabled() {
@@ -50,6 +50,7 @@ export class LoginView extends Component {
 		this.props.history.push('/signup')
 	}
 	render() {
+		//console.log('Login.js', this.props);
 		return (
 			<div className="Login Form">
 				<form onSubmit={this.handleSubmit}>
@@ -75,6 +76,7 @@ export class LoginView extends Component {
 					<Button
 						block
 						bsSize="large"
+						bsStyle="primary"
 						disabled={this.isDisabled()}
 						onClick={this.handleSubmit}
 						type="submit"
@@ -82,8 +84,6 @@ export class LoginView extends Component {
 						Войти
 					</Button>
 				</form>
-				<br/>
-				<br/>
 				<br/>
 				<br/>
 				<Button

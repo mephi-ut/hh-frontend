@@ -4,6 +4,7 @@ const initialState = {
 	data: null,
 	isLoading: false,
 	message: null,
+	redirectTo: null,
 }
 
 export default function userUpdate(state = initialState, { type, payload }) {
@@ -14,7 +15,7 @@ export default function userUpdate(state = initialState, { type, payload }) {
 		case constants.LOGIN_USER_SUCCESS:
 			return { data: payload, isLoading: false }
 		case constants.LOGIN_USER_FAILURE:
-			return { ...initialState, message: payload.message }
+			return { ...initialState, message: payload.message, redirectTo: payload.redirectTo }
 		case constants.LOGOUT_USER:
 			return initialState
 		default:

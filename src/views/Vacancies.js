@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./Vacancies.css";
 import { BaseComponent } from "../components/BaseComponent";
 import { connect } from 'react-redux';

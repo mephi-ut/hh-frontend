@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import "./Frontend.css";
 import "../Vacancies.css";
@@ -22,7 +22,7 @@ class VacancyFrontendView extends BaseComponent {
 		return (
 			<div className='vacancy'>
 				<h1>Frontend-разработчик (ReactJS)</h1>
-				<p><a href='https://voip.mephi.ru/units/0153613' target='_blank'>Отдел юникс-технологий управление информатизации НИЯУ МИФИ</a> ищет разработчика на ReactJS на полставки.</p>
+				<p><a href='https://voip.mephi.ru/units/0153613' target='_blank' rel="noopener noreferrer">Отдел юникс-технологий управление информатизации НИЯУ МИФИ</a> ищет разработчика на ReactJS на полставки.</p>
 				<h3>Условия</h3>
 				<ul className='conditions'>
 					<li>20 часов в неделю. Допустима частично удалённая работа.</li>

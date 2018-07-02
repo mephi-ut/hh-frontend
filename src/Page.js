@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 //import { Navbar, ButtonToolbar, Button } from "react-bootstrap";
 import { Navbar, ButtonToolbar } from "react-bootstrap";
 import logo from './favicon.ico';
@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { tryToken, loginUserSuccess, loginUserFailure } from './actions/user'
 import { BaseComponent } from "./components/BaseComponent";
 
-import { userIsAuthenticated, userIsNotAuthenticated } from './auth'
+//import { userIsAuthenticated, userIsNotAuthenticated } from './auth'
 
 import Popup from "./views/Popup";
 
@@ -43,6 +43,7 @@ class Page extends BaseComponent {
 	}
 
 	onAuthed(token) {
+		//console.log("onAuthed");
 		//this.state.history.push("/");
 		//console.log(this.state, this.props);
 		this.props.loginUserSuccess(token);
@@ -50,11 +51,12 @@ class Page extends BaseComponent {
 	}
 
 	onAuthFailed(error) {
+		//console.log("onAuthFailed");
 		this.props.loginUserFailure(error)
 	}
 
 	setProfile(profile) {
-		console.log('profile', profile);
+		//console.log('profile', profile);
 		this.setState({
 			history: this.state.history,
 			user: this.state.user,
@@ -63,10 +65,34 @@ class Page extends BaseComponent {
 	}
 
 	componentDidMount() {
+		//console.log('Page: componentDidMount()');
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		//console.log('Page: componentDidUpdate(): ', this.props);
+		if (this.props.isLoading) {
+			return;
+		}
+		var prevToken = "";
+		var newToken = "";
+		if (prevProps.user.data != null) {
+			prevToken = prevProps.user.data.token;
+		}
+		if (this.props.user.data != null) {
+			newToken = this.props.user.data.token;
+		}
+		if (prevToken === newToken) {
+			return;
+		}
+		//console.log("the token changed: ", prevToken, newToken);
+		this.api('profile').then(data => this.setProfile(data));
 	}
 
 	render() {
-		console.log('Page props', this.props);
+		//console.log('Page props', this.props);
+		if (this.props.user.redirectTo != null) {
+			this.state.history.push(this.props.user.redirectTo);
+		}
 		return (
 			<Router history={this.state.history} user={this.props.user}>
 				<div className={"Page"+(this.props.user.data==null?' notAuthed':' authed')}>
