@@ -52,10 +52,11 @@ export class ProfileView extends BaseComponent {
 
 	updateProfile() {
 		this.api('profile', {method: 'PUT'}, {username: this.state.login, password: this.state.password, email: this.state.email, phone: this.state.phone})
-			.then(response => function() {
+			.then(function(response) {
 					console.log('response', response);
 					if (response.status === "OK") {
 						alert('Сохранено');
+						window.location.reload(true);
 					} else {
 						alert('Не удалось сохранить. '+response.error);
 					}
@@ -125,9 +126,11 @@ export class ProfileView extends BaseComponent {
 							value={this.state.phone}
 						/>
 					</FormGroup>
+					<br />
 					<Button
 						block
 						bsSize="large"
+						bsStyle="primary"
 						disabled={this.isDisabled()}
 						onClick={this.handleSubmit}
 						type="submit"

@@ -33,17 +33,24 @@ class VacancyFrontendTestView extends BaseComponent {
 		var values = {};
 		for(var i=0; i<this.form.current.elements.length; i++) {
 			var el = this.form.current.elements[i];
+			if (el.name === "") {
+				continue
+			}
 			values[el.name] = el.value;
 		}
+		values["phone"] = this.state.phone;
 		var history = this.props.history;
 		this.api(this.props.location.pathname.substr(1), {method: 'POST'}, values)
-			.then(response => function() {
+			.then(function(response) {
 				if (response.status === "OK") {
 					alert('Заявка отправлена');
 					history.push('/');
 				} else {
 					alert('Не удалось отправить заявку: '+response.error);
 				}
+			})
+			.catch((error) => {
+				alert('Не удалось отправить заявку: '+error);
 			});
 	}
 
